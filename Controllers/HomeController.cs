@@ -1,4 +1,4 @@
-﻿using eDziennikv2.Models;
+﻿using eDziennikv2.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

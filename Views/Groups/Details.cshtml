@@ -1,0 +1,45 @@
+﻿@model eDziennikv2.Models.ViewModels.GroupUsersViewModel
+
+@{
+    ViewData["Title"] = "Lista uczniów";
+}
+
+<h1>Lista uczniów</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.GroupName)</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Imię
+                </th>
+                <th>
+                    Nazwisko
+                </th>
+                <th>
+                    Zarządzaj
+                </th>
+            </tr>
+        </thead>
+    @for (int i = 0; i < Model.Users.Count; i++)
+        {
+            <tr>
+                <td>
+                    @Model.Users.ToArray()[i].FirstName
+                </td>
+                <td>
+                    @Model.Users.ToArray()[i].LastName
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-controller="AccountManager"  asp-route-id="@Model.Users.ToArray()[i].Id">Zarządzaj</a>
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.GroupId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

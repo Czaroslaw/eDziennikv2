@@ -1,4 +1,4 @@
-namespace eDziennikv2.Models
+namespace eDziennikv2.Models.ViewModels
 {
     public class ErrorViewModel
     {

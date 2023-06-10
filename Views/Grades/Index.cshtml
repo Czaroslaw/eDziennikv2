@@ -1,0 +1,72 @@
+﻿@model IEnumerable<eDziennikv2.Models.Grades>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@{
+    ViewData["Title"] = "Lista ocen";
+}
+
+<h1>Lista ocen</h1>
+
+<p>
+    <a asp-action="Create">Dodaj ocenę</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Administrator") || User.IsInRole("Nauczyciel")))
+            {
+                <th>
+                    Uczeń
+                </th>
+            }
+            <th>
+                Komentarz
+            </th>
+            <th>
+                Ocena
+            </th>
+            <th>
+                Przedmiot
+            </th>
+            <th>
+                Dodano przez:
+            </th>
+            <th>
+                Dodano
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+            @if (SignInManager.IsSignedIn(User) && (User.IsInRole("Administrator") || User.IsInRole("Nauczyciel")))
+            {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssuedTo.FirstName) @Html.DisplayFor(modelItem => item.IssuedTo.LastName)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Grade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Subject.Name)
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.IssuedBy.FirstName) @Html.DisplayFor(modelItem => item.IssuedBy.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
